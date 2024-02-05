@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generative abstracts</title>
+
+    <!-- p5.js -->
+    <script src="lib/p5/p5.js"></script>
+    <!-- Video record -->
+    <script src="lib/CCapture.all.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div id="controlPanel">
+        <div class="settings">
+            <h3>Settings</h3>
+            FPS: <input type="number" id="fpsInput" value="30" min="1" max="60">
+        </div>
+        <div class="recording">
+            <h3>Recording</h3>
+            FPS: <input type="number" id="recordFpsInput" value="30" min="1" max="60">
+            Max Recording Time (s): <input type="number" id="maxRecordTimeInput" value="10" min="1" max="120">
+            <button id="recordButton">Record</button>
+        </div>
+        <div class="models">
+            <h3>Models</h3>
+            <h4>2D</h4>
+            <button id="snakesButton">B&W Snakes</button>
+            <button id="shatterButton">Shatter</button>
+            <button id="fractalTreeButton">Fractal Tree</button>
+            <button id="particleSystemButton">Particle System</button>
+            <button id="particleGalaxyButton">Particle Galaxy</button>
+            <button id="kaleidoscopicPatternButton">Kaleidoscopic Pattern</button>
+
+            <h4>Interactive</h4>
+
+            
+            <h4>Coming soon... 3D</h4>
+            <!--<button id="waveform3DButton">3D Waveform</button>-->
+        </div>
+    </div>
+    <script src="recorder.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
