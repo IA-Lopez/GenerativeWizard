@@ -3,16 +3,12 @@
 // Author IA López. Find me on Twitter and Instagram: @_IA_Lopez
 // https://linktr.ee/ialopez
 
-// B&W Snakes
-const NUM_SNAKES = 5; // Number of snakes
-const SNAKE_LENGTH = 20; // Length of each snake
-const ELEMENT_SIZE = 30; // Size of each snake segment
-const SNAKE_SPEED_RANGE = { min: -11, max: 11 }; // Speed range for snake movement
+// Control panel
+let fpsInput,recordFpsInput,maxRecordTimeInput,recordButton,
+shatterButton,fractalTreeButton, particleSystemButton, soundWavesButton, alienLanguageButton, atomButton, relationsButton
+interactiveSoundWavesButton, interactiveRelationsButton;
+//waterSimulationButton, waveform3DButton;
 
-// Controles
-let fpsInput,recordFpsInput,maxRecordTimeInput,recordButton,shatterButton,fractalTreeButton,particleSystemButton,waveform3DButton;
-
-let snakes = [];
 let currentEffect = 'snakes'; // Default effect
 let currentCanvas = null;
 
@@ -23,59 +19,6 @@ function setup() {
 
     initSnakes();
     initUI();
-}
-
-function draw() {
-    switch (currentEffect) {
-        case 'snakes':
-            drawSnakes();
-            break;
-        case 'shatter':
-            generateColoredShatterEffect();
-            break;
-        case 'fractalTree':
-            drawFractalTree();
-            break;
-        case 'particleSystem':
-            runParticleSystem();
-            break;
-        case 'particleGalaxy':
-            drawGalaxy();
-            break;
-        case 'kaleidoscopicPattern':
-            drawPatternWithConfig();
-            break;
-        case '3dWaveform':
-            //generate3DWaveform();
-            break;
-    }
-
-    recorder.handleRecording();
-}
-
-function createCanvasForEffect(effect) {
-    /*if (currentCanvas) {
-        currentCanvas.remove(); // Delete previous canvas
-    }
-
-    if (effect === '3dWaveform') {
-        // 3D Canvas
-        currentCanvas = createCanvas(windowWidth, windowHeight, WEBGL);
-    } else {
-        currentCanvas = createCanvas(windowWidth, windowHeight);
-    }
-
-    colorMode(RGB, 255);
-    background(255);*/
-
-    // Init
-    if (effect === 'snakes') {
-        initSnakes();
-    } else if (effect === 'particleGalaxy') {
-        initGalaxy();
-    } else if (effect === 'kaleidoscopicPattern') {
-        generatePatternConfig();
-    }
 }
 
 function initUI() {
@@ -111,13 +54,76 @@ function initUI() {
     kaleidoscopicPatternButton = select('#kaleidoscopicPatternButton');
     kaleidoscopicPatternButton.mousePressed(() => changeEffect('kaleidoscopicPattern'));
 
+    soundWavesButton = select('#soundWavesButton');
+    soundWavesButton.mousePressed(() => changeEffect('soundWaves'));
+
+    alienLanguageButton = select('#alienLanguageButton');
+    alienLanguageButton.mousePressed(() => changeEffect('alienLanguage'));
+
+    atomButton = select('#atomButton');
+    atomButton.mousePressed(() => changeEffect('atom'));
+
+    relationsButton = select('#relationsButton');
+    relationsButton.mousePressed(() => changeEffect('relations'));
+
+    atomButton = select('#atomButton');
+    atomButton.mousePressed(() => changeEffect('atom'));
+
+    interactiveSoundWavesButton = select('#interactiveSoundWavesButton');
+    interactiveSoundWavesButton.mousePressed(() => changeEffect('interactiveSoundWaves'));
+
+    interactiveRelationsButton = select('#interactiveRelationsButton');
+    interactiveRelationsButton.mousePressed(() => changeEffect('interactiveRelations'));
+
+
     //waveform3DButton = select('#waveform3DButton');
     //waveform3DButton.mousePressed(() => changeEffect('3dWaveform'));
+
+    //waterSimulationButton = select('#waterSimulationButton');
+    //waterSimulationButton.mousePressed(() => changeEffect('waterSimulation'));
 }
 
 function changeEffect(effect) {
     currentEffect = effect;
     createCanvasForEffect(effect);
+}
+
+function createCanvasForEffect(effect) {
+    /*if (currentCanvas) {
+        currentCanvas.remove(); // Delete previous canvas
+    }
+
+    if (effect === '3dWaveform') {
+        // 3D Canvas
+        currentCanvas = createCanvas(windowWidth, windowHeight, WEBGL);
+    } else {
+        currentCanvas = createCanvas(windowWidth, windowHeight);
+    }
+
+    colorMode(RGB, 255);
+    background(255);*/
+
+    // Init
+    if (effect === 'snakes') {
+        initSnakes();
+    } else if (effect === 'particleGalaxy') {
+        initGalaxy();
+    } else if (effect === 'kaleidoscopicPattern') {
+        generatePatternConfig();
+    } else if (effect === 'meteorShower') {
+        initMeteorShower();
+    } else if (effect === 'alienLanguage') {
+        initAlienLanguage();
+    } else if (effect === 'atom') {
+        initAtom();
+    } else if (effect === 'relations') {
+        initRelations();
+    } else if (effect === 'interactiveRelations') {
+        initInteractiveRelations();
+    } else if (effect === 'waterSimulation') {
+        initWaterSimulation();
+    } 
+
 }
 
 function updateFrameRate() {
@@ -129,8 +135,68 @@ function updateFrameRate() {
         fpsInput.value(frameRate);
     }
 }
-// Snakes (BvsW")
+
+
+function draw() {
+    switch (currentEffect) {
+        case 'snakes':
+            drawSnakes();
+            break;
+        case 'shatter':
+            generateColoredShatterEffect();
+            break;
+        case 'fractalTree':
+            drawFractalTree();
+            break;
+        case 'particleSystem':
+            runParticleSystem();
+            break;
+        case 'particleGalaxy':
+            drawGalaxy();
+            break;
+        case 'kaleidoscopicPattern':
+            drawPatternWithConfig();
+            break;
+        case 'soundWaves':
+            drawSoundWaves();
+            break;
+        case 'alienLanguage':
+            drawAlienLanguage();
+            break;
+        case 'atom':
+            drawAtom();
+            break;
+        case 'relations':
+            drawRelations();
+            break;
+
+        case 'interactiveSoundWaves':
+            drawInteractiveSoundWaves();
+            break;
+        case 'interactiveRelations':
+            drawInteractiveRelations();
+            break;
+
+        case '3dWaveform':
+            //generate3DWaveform();
+            break;
+        case 'waterSimulation':
+            drawWaterSimulation();
+            break;
+    }
+
+    recorder.handleRecording();
+}
+
+// B&W Snakes
+const NUM_SNAKES = 5; // Number of snakes
+const SNAKE_LENGTH = 20; // Length of each snake
+const ELEMENT_SIZE = 30; // Size of each snake segment
+const SNAKE_SPEED_RANGE = { min: -11, max: 11 }; // Speed range for snake movement
+let snakes = [];
+
 function initSnakes() {
+    snakes = [];
     // Initialize snakes
     for (let n = 0; n < NUM_SNAKES; n++) {
         let snake = {
@@ -219,11 +285,11 @@ function branch(len) {
 
     if (len > 4) {
         push();
-        rotate(angle); // Rotación basada en frameCount
+        rotate(angle); // rotation
         branch(len * 0.67);
         pop();
         push();
-        rotate(-angle); // Rotación opuesta
+        rotate(-angle);
         branch(len * 0.67);
         pop();
     }
@@ -234,6 +300,8 @@ function branch(len) {
 let particles = [];
 
 function runParticleSystem() {
+    particles = [];
+
     for (let i = 0; i < 50; i++) {
         particles.push(new Particle());
     }
@@ -278,30 +346,24 @@ class Particle {
     }
 }
 
-
-function generate3DWaveform() {
-    rotateX(frameCount * 0.01);
-    rotateY(frameCount * 0.01);
-    for (let i = -50; i < 50; i++) {
-        beginShape(TRIANGLE_STRIP);
-        for (let j = -50; j < 50; j++) {
-            vertex(i, j, sin(frameCount * 0.02 + sqrt(i * i + j * j)) * 10);
-            vertex(i, j + 1, sin(frameCount * 0.02 + sqrt(i * i + (j + 1) * (j + 1))) * 10);
-        }
-        endShape();
-    }
-}
-
-
 // Particle Galaxy
 let galaxyParticles = [];
 const NUM_GALAXY_PARTICLES = 200;
+
+function initGalaxy() {
+    galaxyParticles = [];
+    for (let i = 0; i < NUM_GALAXY_PARTICLES; i++) {
+        galaxyParticles.push(new GalaxyParticle());
+    }
+}
 
 function drawGalaxy() {
     translate(width / 2, height / 2); // Centered
     rotate(frameCount * 0.002); // Rotation
 
     drawNebulaBackground();
+
+    galaxyParticles = [];
 
     galaxyParticles.forEach(particle => {
         particle.move();
@@ -346,8 +408,6 @@ class GalaxyParticle {
     }
 }
 
-
-
 function drawNebulaBackground() {
     for (let i = 0; i < width; i += 60) {
         for (let j = 0; j < height; j += 60) {
@@ -355,14 +415,6 @@ function drawNebulaBackground() {
             noStroke();
             ellipse(i, j, 100, 100);
         }
-    }
-}
-
-
-function initGalaxy() {
-    galaxyParticles = [];
-    for (let i = 0; i < NUM_GALAXY_PARTICLES; i++) {
-        galaxyParticles.push(new GalaxyParticle());
     }
 }
 
@@ -377,6 +429,14 @@ let patternConfig = [];
 let colors = [];
 
 function generatePatternConfig() {
+    patternRotation = [];
+    patternRotationSpeed = [];
+    initialElementRotation = [];
+    initialPatternRotation = [];
+    elementRotation = [];
+    elementRotationSpeed = [];
+    patternConfig = [];
+    colors = [];
     // Generate colors
     for (let i = 0; i < 100; i++) {
         colors.push(color(random(255), random(255), random(255), 60));
@@ -482,6 +542,484 @@ function drawStarElement(x, y, size, rotation, col) {
     endShape(CLOSE);
     pop();
 }
+
+// Sound Waves
+function drawSoundWaves() {
+    // Create a gradient background from top to bottom
+    for (let i = 0; i <= height; i++) {
+        let inter = map(i, 0, height, 0, 1);
+        let c = lerpColor(color(10, 10, 20), color(0, 0, 0), inter);
+        stroke(c);
+        line(0, i, width, i);
+    }
+
+    let xoff = 0; // Start xoff at 0
+
+    // Use noise to draw waves varying in height and color
+    for (let x = 0; x <= width; x += 5) { // Reduce the distance between lines for a denser look
+        let y = map(noise(xoff, millis() / 1000), 0, 1, 100, height - 100);
+        // Dynamic color based on x position and time
+        let r = map(sin(millis() / 1000 + x * 0.01), -1, 1, 0, 255);
+        let g = map(x, 0, width, 0, 255);
+        let b = map(cos(millis() / 1000 + x * 0.01), -1, 1, 255, 0);
+        stroke(r, g, b);
+        strokeWeight(map(sin(xoff), -1, 1, 1, 5)); // Vary line width for visual interest
+
+        line(x, height, x, y); // Draw each line from bottom to the calculated y position
+        xoff += 0.05; // Increment xoff for the next line
+    }
+}
+
+
+// Alien language
+let alienPhrase = [];
+
+function initAlienLanguage() {
+    let phraseLength = 5; // Number or character
+    let padding = width * 0.1;
+    let usableWidth = width - (padding * 2);
+    let spacing = usableWidth / (phraseLength + 1);
+    
+    alienPhrase = [];
+    
+    for (let i = 1; i <= phraseLength; i++) {
+        let xPosition = (spacing * i) + padding;
+        alienPhrase.push(new AlienCharacter(xPosition, height / 2));
+    }
+}
+
+
+function drawAlienLanguage() {
+    background(0);
+    alienPhrase.forEach(char => {
+        char.update();
+        char.show();
+    });
+}
+
+class AlienCharacter {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.segments = [];
+    this.initializeSegments();
+    this.transformationDelay = 150;
+  }
+
+  initializeSegments() {
+    this.segments = [];
+    // Generate character with segmets
+    let numSegments = random([3, 4, 5]); // 3 to 5 segments per char
+    for (let i = 0; i < numSegments; i++) {
+      if (random() < 0.5) { // 50% prob line
+        this.segments.push({
+          type: 'line',
+          current: {
+            x1: random(-20, 20), y1: random(-20, 20),
+            x2: random(-20, 20), y2: random(-20, 20)
+          },
+          target: {
+            x1: random(-20, 20), y1: random(-20, 20),
+            x2: random(-20, 20), y2: random(-20, 20)
+          },
+          timer: 0,
+          isTransforming: true,
+        });
+      } else { // 50% Prob curve
+        this.segments.push({
+          type: 'curve',
+          current: {
+            x1: random(-20, 20), y1: random(-20, 20),
+            cx1: random(-20, 20), cy1: random(-20, 20), // Control points
+            cx2: random(-20, 20), cy2: random(-20, 20),
+            x2: random(-20, 20), y2: random(-20, 20)
+          },
+          target: {
+            x1: random(-20, 20), y1: random(-20, 20),
+            cx1: random(-20, 20), cy1: random(-20, 20),
+            cx2: random(-20, 20), cy2: random(-20, 20),
+            x2: random(-20, 20), y2: random(-20, 20)
+          },
+          timer: 0,
+          isTransforming: true,
+        });
+      }
+    }
+  }
+
+  update() {
+    this.segments.forEach(segment => {
+      if (segment.isTransforming) {
+        // Interpolation
+        for (const key in segment.current) {
+          segment.current[key] = lerp(segment.current[key], segment.target[key], 0.05);
+        }
+
+        // Proximity
+        if (this.isSegmentComplete(segment)) {
+          segment.isTransforming = false;
+          segment.timer = 0;
+        }
+      } else {
+        segment.timer++;
+        if (segment.timer > this.transformationDelay) {
+          // New objectives
+          this.generateNewTargets(segment);
+          segment.isTransforming = true;
+        }
+      }
+    });
+  }
+
+  isSegmentComplete(segment) {
+    return Object.keys(segment.current).every(key => abs(segment.current[key] - segment.target[key]) < 0.1);
+  }
+
+  generateNewTargets(segment) {
+    // transformation
+    for (const key in segment.target) {
+      segment.target[key] = random(-20, 20);
+    }
+  }
+
+  show() {
+    push();
+    translate(this.pos.x, this.pos.y);
+    stroke(255);
+    noFill();
+    this.segments.forEach(({type, current}) => {
+      if (type === 'line') {
+        line(current.x1, current.y1, current.x2, current.y2);
+      } else {
+        bezier(current.x1, current.y1, current.cx1, current.cy1, current.cx2, current.cy2, current.x2, current.y2);
+      }
+    });
+    pop();
+  }
+}
+
+// Atom
+let atomParticles = [];
+let attractors = [];
+let wind;
+const numParticles = 100;
+const numAttractors = 3;
+
+function initAtom() {
+  createCanvas(windowWidth, windowHeight);
+  colorMode(HSB, 360, 100, 100, 100);
+  background(0, 0, 10);
+
+  atomParticles = [];
+  attractors = [];
+
+  // Particle
+  for (let i = 0; i < numParticles; i++) {
+    atomParticles.push(new AtomParticle(random(width), random(height)));
+  }
+
+  // Attraction zone
+  for (let i = 0; i < numAttractors; i++) {
+    attractors.push(createVector(random(width), random(height)));
+  }
+
+  wind = createVector(0, 0); // Wind
+}
+
+function drawAtom() {
+  wind.rotate(random(-0.05, 0.05)); // Change wind direction
+
+  atomParticles.forEach((p) => {
+    attractors.forEach((attractor) => {
+      p.attracted(attractor); // Attraction 
+    });
+    p.applyForce(wind); // Wind
+    p.update();
+    p.edges();
+    p.show();
+  });
+}
+
+class AtomParticle {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.vel = p5.Vector.random2D();
+    this.acc = createVector();
+    this.color = random(360);
+    this.size = random(1, 5);
+  }
+
+  applyForce(force) {
+    this.acc.add(force);
+  }
+
+  attracted(target) {
+    let force = p5.Vector.sub(target, this.pos);
+    let dsquared = force.magSq();
+    dsquared = constrain(dsquared, 25, 500);
+    let strength = 5 / dsquared;
+    force.setMag(strength);
+    this.acc.add(force);
+  }
+
+  update() {
+    this.vel.add(this.acc);
+    this.pos.add(this.vel);
+    this.acc.mult(0); // Reset acceleration
+    this.color += 1; // Change color gradually
+    if (this.color > 360) {
+      this.color = 0;
+    }
+  }
+
+  edges() {
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
+
+  show() {
+    stroke(this.color, 100, 100, 50);
+    strokeWeight(this.size);
+    point(this.pos.x, this.pos.y);
+  }
+}
+
+// Relations
+let particlesRelations = [];
+
+function initRelations() {
+  createCanvas(windowWidth, windowHeight);
+  background(20, 20, 20);
+  colorMode(HSB, 360, 100, 100, 100);
+
+  particlesRelations = [];
+  let particlesCount = 100;
+  for (let i = 0; i < particlesCount; i++) {
+    particlesRelations.push(new RelationsParticle());
+  }
+}
+
+function drawRelations() {
+    particlesRelations.forEach((particle) => {
+    particle.update();
+    particle.display();
+    particle.checkEdges();
+  });
+}
+
+class RelationsParticle {
+  constructor() {
+    this.pos = createVector(random(width), random(height));
+    this.vel = p5.Vector.random2D();
+    this.acc = createVector(0, 0);
+    this.maxSpeed = random(2, 5);
+    this.color = color(random(360), 80, 100);
+  }
+
+  update() {
+    this.vel.add(this.acc);
+    this.vel.limit(this.maxSpeed);
+    this.pos.add(this.vel);
+    this.acc.mult(0); // Reset acceleration
+  }
+
+  display() {
+    stroke(this.color);
+    strokeWeight(2);
+    point(this.pos.x, this.pos.y);
+
+    // Connections
+    particlesRelations.forEach(other => {
+      let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+      if (d < 100) {
+        strokeWeight(map(d, 0, 100, 2, 0.1));
+        line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+      }
+    });
+  }
+
+  checkEdges() {
+    if (this.pos.x > width) this.pos.x = 0;
+    if (this.pos.x < 0) this.pos.x = width;
+    if (this.pos.y > height) this.pos.y = 0;
+    if (this.pos.y < 0) this.pos.y = height;
+  }
+}
+
+
+
+// Interactive Sound Waves
+function drawInteractiveSoundWaves() {
+    // Create a gradient background
+    for (let i = 0; i <= height; i++) {
+        let inter = map(i, 0, height, 0, 1);
+        let c = lerpColor(color(10, 10, 20), color(0, 0, 0), inter);
+        stroke(c);
+        line(0, i, width, i);
+    }
+
+    let xoff = 0; // Start xoff at 0
+
+    // Adjust wave spacing based on mouse X position
+    let waveSpacing = map(mouseX, 0, width, 2, 20);
+
+    // Loop to draw waves
+    for (let x = 0; x <= width; x += waveSpacing) {
+        // Adjust wave height based on mouse Y position
+        let maxHeight = map(mouseY, 0, height, height - 50, 50);
+        let y = map(noise(xoff, millis() / 1000), 0, 1, maxHeight, height - maxHeight);
+
+        // Change color based on mouse position
+        let r = map(mouseX, 0, width, 0, 255);
+        let g = map(mouseY, 0, height, 255, 0);
+        let b = 255 - r;
+        stroke(r, g, b);
+        strokeWeight(map(sin(xoff), -1, 1, 1, 3));
+
+        line(x, height, x, y);
+        xoff += 0.05;
+    }
+}
+
+// Interactive relations
+let interactiveRelationsParticle = [];
+
+function initInteractiveRelations() {
+  createCanvas(windowWidth, windowHeight);
+  background(20, 20, 20);
+  colorMode(HSB, 360, 100, 100, 100);
+
+  let particlesCount = 50;
+  interactiveRelationsParticle = [];
+  for (let i = 0; i < particlesCount; i++) {
+    interactiveRelationsParticle.push(new InteractiveRelationsParticle());
+  }
+}
+
+function drawInteractiveRelations() {
+    interactiveRelationsParticle.forEach((particle) => {
+    particle.update();
+    particle.display();
+    particle.checkEdges();
+    particle.interactWithMouse();
+  });
+}
+
+class InteractiveRelationsParticle {
+  constructor() {
+    this.pos = createVector(random(width), random(height));
+    this.vel = p5.Vector.random2D();
+    this.acc = createVector(0, 0);
+    this.maxSpeed = random(2, 5);
+    this.color = color(random(360), 80, 100);
+    this.size = random(3, 7);
+  }
+
+  repelOtherParticles() {
+    interactiveRelationsParticle.forEach(other => {
+      if (other !== this) {
+        let distance = p5.Vector.dist(this.pos, other.pos);
+        if (distance < 100) { // Repel ratio
+          let repelForce = p5.Vector.sub(this.pos, other.pos);
+          repelForce.normalize();
+          repelForce.div(distance); // Repel decrease with more distance
+          this.acc.add(repelForce);
+        }
+      }
+    });
+  }
+
+  update() {
+    this.repelOtherParticles();
+    this.vel.add(this.acc);
+    this.vel.limit(this.maxSpeed);
+    this.pos.add(this.vel);
+    this.acc.mult(0);
+  }
+
+  display() {
+    noStroke();
+    fill(this.color);
+    circle(this.pos.x, this.pos.y, this.size);
+
+    interactiveRelationsParticle.forEach(other => {
+      let d = dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+      if (d < 150) {
+        let alpha = map(d, 0, 150, 255, 0);
+        stroke(this.color, alpha);
+        strokeWeight(map(d, 0, 150, 2, 0));
+        line(this.pos.x, this.pos.y, other.pos.x, other.pos.y);
+      }
+    });
+  }
+
+  checkEdges() {
+    if (this.pos.x >= width) {
+      this.pos.x = width;
+      this.vel.x *= -1;
+    } else if (this.pos.x <= 0) {
+      this.pos.x = 0;
+      this.vel.x *= -1;
+    }
+
+    if (this.pos.y >= height) {
+      this.pos.y = height;
+      this.vel.y *= -1;
+    } else if (this.pos.y <= 0) {
+      this.pos.y = 0;
+      this.vel.y *= -1;
+    }
+  }
+
+  interactWithMouse() {
+    let mousePos = createVector(mouseX, mouseY);
+    let forceDirection = p5.Vector.sub(mousePos, this.pos);
+    let distance = forceDirection.mag();
+    let forceMagnitude = constrain(map(distance, 0, 200, 5, 0), 0, 5);
+    forceDirection.normalize();
+    let force = forceDirection.mult(forceMagnitude);
+    this.acc.add(force);
+  }
+}
+
+// 3D Waveform
+function generate3DWaveform() {
+    rotateX(frameCount * 0.01);
+    rotateY(frameCount * 0.01);
+    for (let i = -50; i < 50; i++) {
+        beginShape(TRIANGLE_STRIP);
+        for (let j = -50; j < 50; j++) {
+            vertex(i, j, sin(frameCount * 0.02 + sqrt(i * i + j * j)) * 10);
+            vertex(i, j + 1, sin(frameCount * 0.02 + sqrt(i * i + (j + 1) * (j + 1))) * 10);
+        }
+        endShape();
+    }
+}
+
+// 3D Water
+function drawWaterSimulation() {
+    background(0);
+    rotateX(-PI/6);
+    rotateY(PI/4);
+    fill(0, 0, 255, 100);
+    translate(-width / 2, -height / 2, 0);
+    for (let i = 0; i < width; i += 20) {
+        for (let j = 0; j < height; j += 20) {
+            const d = dist(i, j, width / 2, height / 2);
+            const offset = map(d, 0, dist(0, 0, width / 2, height / 2), -PI, PI);
+            const a = angle + offset;
+            const h = floor(map(sin(a), -1, 1, 100, 300));
+            push();
+            translate(i + 10, j + 10, h / 2);
+            normalMaterial();
+            box(20, 20, h);
+            pop();
+        }
+    }
+    angle += 0.1;
+}
+
 
 function windowResized() {
     console.log("Canvas size: width - " + windowWidth + ", height - " + windowHeight);
