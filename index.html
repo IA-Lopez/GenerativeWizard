@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Generative abstracts</title>
 
@@ -10,8 +11,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
+
 </head>
+
 <body>
     <div id="controlPanel">
         <div class="settings">
@@ -24,33 +26,44 @@
             Max Recording Time (s): <input type="number" id="maxRecordTimeInput" value="10" min="1" max="120">
             <button id="recordButton">Record</button>
         </div>
+        <div class="aspect-ratio">
+            <h3>Aspect Ratio</h3>
+            <button id="aspect16_9">16:9</button>
+            <button id="aspect4_3">4:3</button>
+            <button id="aspect21_9">21:9</button>
+            <button id="aspect1_1">1:1</button>
+            <button id="aspect9_16">9:16</button>
+            <button id="aspect3_4">3:4</button>
+        </div>
         <div class="models">
             <h3>Models</h3>
             <h4>2D</h4>
             <button id="snakesButton">B&W Snakes</button>
             <button id="shatterButton">Shatter</button>
             <button id="fractalTreeButton">Fractal Tree</button>
-            <button id="particleSystemButton">Particle System</button>
             <button id="particleGalaxyButton">Particle Galaxy</button>
             <button id="kaleidoscopicPatternButton">Kaleidoscopic Pattern</button>
             <button id="soundWavesButton">Sound Waves</button>
             <button id="alienLanguageButton">Alien language</button>
             <button id="atomButton">Atom</button>
             <button id="relationsButton">Relations</button>
+            <button id="colorFlowButton">Color Flow</button>
 
-            <h4>Interactive (mouse)</h4>
+            <h5>Interactive (mouse)</h5>
             <button id="interactiveSoundWavesButton">Sound Waves</button>
             <button id="interactiveRelationsButton">Relations</button>
             <!--<button id="psychedelicGardenButton">Psychedelic Garden</button>-->
 
             <!--<button id="gravityBallsButton">Gravity balls</button>-->
-            
-            <h4>Coming soon... 3D</h4>
-            <!--<button id="waveform3DButton">3D Waveform</button>-->
-            <!--<button id="waterSimulationButton">Water simulation</button>-->
+
+            <h4>3D</h4>
+            <button id="waveformButton">Waveform</button>
+            <button id="waterSimulationButton">Water simulation</button>
+            <button id="galaxyButton">Galaxy</button>
         </div>
     </div>
     <script src="recorder.js"></script>
     <script src="sketch.js"></script>
 </body>
+
 </html>
